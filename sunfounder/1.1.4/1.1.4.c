@@ -32,7 +32,7 @@ void init(void)
 
 void hc595_shift(unsigned char dat)
 {
-    int i;
+    int i;:
     for (i = 0; i < 8; i++)
     {
         // ビットごとにdatデータをSDI（DS）に割り当てる
