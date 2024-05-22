@@ -3,7 +3,7 @@
 
 int main(int argh, char *argv[])
 {
-    cv::VideoCapture cap(1); // デバイスのオープン
+    cv::VideoCapture cap(0); // デバイスのオープン
     cv::Mat frame;           // 取得したフレーム
     if (!cap.isOpened())     // カメラデバイスが正常にオープンしたか確認．
     {
