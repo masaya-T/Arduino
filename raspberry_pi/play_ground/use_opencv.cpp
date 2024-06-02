@@ -1,9 +1,13 @@
+#ifndef __OPENCV__
+#define __OPENCV__
 #include "opencv2/opencv.hpp"
+#endif
+#include<iostream>
 #include "facerecog.hpp"
-
+#include "pthread.h"
 int main(int argh, char *argv[])
 {
-    cv::VideoCapture cap(0); // デバイスのオープン
+    cv::VideoCapture cap(0, cv::CAP_V4L); // デバイスのオープン
     cv::Mat frame;           // 取得したフレーム
     if (!cap.isOpened())     // カメラデバイスが正常にオープンしたか確認．
     {
@@ -13,6 +17,8 @@ int main(int argh, char *argv[])
 
     while (cap.read(frame)) // 無限ループ
     {
+         //cv::resize(入力画像、出力画像、Size（）,拡大率、拡大率)
+        cv::resize(frame,frame,cv::Size(),0.5,0.5);
         face_recog(frame);
         cv::imshow("win", frame); // 画像を表示．
         const int key = cv::waitKey(1);

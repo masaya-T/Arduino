@@ -5,8 +5,8 @@
 
 #include "facerecog.hpp"
 
-#define YUNET_MODEL_PATH "/home/takahash/opencv/data/haarcascades/haarcascade_frontalface_default.xml"
-#define SFACE_MODEL_PATH "/home/takahash/opencv/data/haarcascades/haarcascade_frontalface_default.xml"
+#define YUNET_MODEL_PATH "/home/takahash/ダウンロード/face_detection_yunet_2023mar.onnx"
+// #define SFACE_MODEL_PATH "/home/takahash/opencv/data/haarcascades/haarcascade_frontalface_default.xml"
 static void visualize(cv::Mat &input, cv::Mat &faces, int thickness = 2)
 {
 
@@ -34,7 +34,7 @@ cv::Mat face_recog(cv::Mat frame)
     int topK = 5000;
 
     cv::Ptr<cv::FaceDetectorYN> detector = cv::FaceDetectorYN::create(YUNET_MODEL_PATH, "", cv::Size(320, 320), scoreThreshold, nmsThreshold, topK);
-    cv::Ptr<cv::FaceRecognizerSF> faceRecognizer = cv::FaceRecognizerSF::create(SFACE_MODEL_PATH, "");
+    // cv::Ptr<cv::FaceRecognizerSF> faceRecognizer = cv::FaceRecognizerSF::create(SFACE_MODEL_PATH, "");
 
     detector->setInputSize(frame.size());
     detector->detect(frame, faces);
@@ -42,7 +42,7 @@ cv::Mat face_recog(cv::Mat frame)
         return frame;
 
     // Draw results on the input image
-    visualize(vis_image, faces);
+    visualize(frame, faces);
 
-    return vis_image;
+    return frame;
 }
